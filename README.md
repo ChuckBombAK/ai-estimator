@@ -28,4 +28,4 @@ totals, and a grand total) as JSON.
 - [ ] Week 5 — final report + demo
 
 ## Team
-[Teammate 1], [Teammate 2], [Teammate 3] — PM: [PM name]
+Charlies Wilhelm, Malika Abildina — PM: Salaidh Perez
