@@ -1,0 +1,9 @@
+SAMPLE 3 — Tricky / vague
+ 
+Hey, can you paint my place? It's kind of big. A few rooms look rough and one has
+water stains on the ceiling. Want it to look fresh. Not sure how soon. Let me know
+what it'd run me.
+ 
+[Note: no square footage given, number of rooms unclear, "a few rooms" undefined,
+water-stain ceiling implies extra prep/primer. Tool should NOT invent a square
+footage — it should return null where it can't measure and flag the gaps in notes.]
