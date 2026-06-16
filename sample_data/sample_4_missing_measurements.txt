@@ -1,0 +1,10 @@
+SAMPLE 4 — Tricky / missing measurement
+ 
+Need the master bedroom and the hallway repainted, two coats, dark navy walls with
+white trim. Prep included. Navy is a deep color so it'll probably need extra coats
+or a tinted primer. I don't know the square footage off the top of my head, sorry.
+Client: Reyes household, 88 Cedar Lane.
+ 
+[Note: rooms are specified but no measurements. Dark color implies primer/extra
+coat. Tool should estimate what it can, return null for unknowable quantities, and
+note the navy-color coverage assumption.]
