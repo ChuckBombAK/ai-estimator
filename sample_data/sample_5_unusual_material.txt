@@ -1,0 +1,10 @@
+SAMPLE 5 — Tricky / unusual material
+
+Repaint a 600 sq ft accent wall and ceiling in a converted barn. Owner wants a
+specialty limewash finish (not standard latex) and a metallic gold trim. Three
+coats of the limewash to get the texture right. High ceilings — about 16 feet — so
+scaffolding or a lift will be needed. Owner: The Hollowbrook Studio.
+
+[Note: non-standard materials (limewash, metallic) won't have the usual unit price;
+high ceiling adds an equipment line. Tool should create line items for the unusual
+materials and flag the limewash/metallic pricing as an assumption in notes.]
