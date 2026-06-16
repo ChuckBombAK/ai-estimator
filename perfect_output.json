@@ -1,0 +1,47 @@
+{
+  "job_title": "Interior repaint — 2,000 sq ft house, two coats, prep included",
+  "line_items": [
+    {
+      "task": "Surface prep (patch, sand, tape, cover floors)",
+      "category": "labor",
+      "quantity": 8,
+      "unit": "hours",
+      "unit_price": 45.00,
+      "line_total": 360.00
+    },
+    {
+      "task": "Interior painting labor (two coats)",
+      "category": "labor",
+      "quantity": 24,
+      "unit": "hours",
+      "unit_price": 45.00,
+      "line_total": 1080.00
+    },
+    {
+      "task": "Interior wall paint",
+      "category": "materials",
+      "quantity": 12,
+      "unit": "gallons",
+      "unit_price": 35.00,
+      "line_total": 420.00
+    },
+    {
+      "task": "Primer",
+      "category": "materials",
+      "quantity": 4,
+      "unit": "gallons",
+      "unit_price": 28.00,
+      "line_total": 112.00
+    },
+    {
+      "task": "Supplies (tape, rollers, brushes, drop cloths)",
+      "category": "materials",
+      "quantity": 1,
+      "unit": "lot",
+      "unit_price": 85.00,
+      "line_total": 85.00
+    }
+  ],
+  "grand_total": 2057.00,
+  "notes": "Two coats and prep explicitly requested. Paint quantity assumes ~350 sq ft coverage per gallon per coat over 2,000 sq ft of wall area."
+}
