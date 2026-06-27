@@ -1,31 +1,23 @@
-# AI Estimator — s1-foreman-t1
+# AI Estimator (Painting)
 
-Our build for the 2026 Venture & Tech Summer Program (Technical Track, Host: Foreman).
+Takes a plain-language painting job description and returns a structured cost
+estimate (line items with quantity, unit, unit price, line total, and a grand total).
 
-**What it will do:** take a plain-language painting job description and return a clean,
-structured cost estimate (itemized labor + materials, quantities, unit prices, line
-totals, and a grand total) as JSON.
+## How to run
+1. Activate the environment: `source venv/bin/activate`
+2. Install requirements: `pip3 install anthropic python-dotenv openai`
+3. Add your API key to a `.env` file (never committed).
+4. Run the estimator: `python3 code/estimator.py`
+5. Validate an output: `python3 code/validate.py`
 
-> Foreman is our *inspiration* for the problem, not a system we connect to. We use no
-> Foreman code, internal tools, or real customer data. All sample data here is made up.
+## Input
+A plain-text painting job description (see `data/` for samples).
 
-## Repo structure
-```
-/
-├── sample_data/      # made-up job descriptions we test with
-├── code/             # the tool (starts in Week 2)
-├── outputs/          # saved AI outputs (starts in Week 2)
-├── design_doc.md     # our Week 1 design
-├── perfect_output.json  # the target output our AI must hit
-└── README.md
-```
+## Output
+A JSON estimate saved to `outputs/`, with line items and a grand total.
 
-## Status
-- [x] Week 1 — workflow researched, build chosen (Option A, painting), output designed, sample data created
-- [ ] Week 2 — environment set up, first AI call returning JSON
-- [ ] Week 3 — core tool working on the whole sample set
-- [ ] Week 4 — Streamlit interface + accuracy score
-- [ ] Week 5 — final report + demo
+## Missing-data rule
+Missing values are returned as null with an explanation in "notes" — never guessed.
 
-## Team
-Charlies Wilhelm, Malika Abildina — PM: Salaidh Perez
+## Accuracy
+[To be filled in once the full sample set is run.]

@@ -1,22 +1,27 @@
+"""
+estimator.py — Core pipeline for the AI Estimator (painting).
+Takes a raw job description, calls the AI, and returns a structured estimate.
+"""
+
 import os
 import json
+import time
 from dotenv import load_dotenv
 from anthropic import Anthropic
 
 load_dotenv()
 client = Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 
-# The fields we expect every result to contain
-EXPECTED_FIELDS = ["job_title", "line_items", "grand_total", "notes"]
+MODEL = "claude-sonnet-4-6"
+REQUIRED_FIELDS = ["job_title", "line_items", "grand_total", "notes"]
 
 
-def estimate_from_text(job_text):
-    """Takes raw job text, returns a parsed dictionary (or None if it fails)."""
-
+def build_prompt(job_text):
+    """Builds the full prompt: instruction + schema example + the job description."""
     with open("perfect_output.json", "r") as f:
         schema_example = f.read()
 
-    prompt = f"""You are an estimator for a painting contractor.
+    return f"""You are an estimator for a painting contractor.
 Read the job description below and return ONLY valid JSON, no other text.
 
 The JSON must match this exact shape and field names:
@@ -25,55 +30,73 @@ The JSON must match this exact shape and field names:
 Rules:
 - Each line_total must equal quantity * unit_price.
 - grand_total must equal the sum of all line_total values.
-- If a value is missing, use null and explain in "notes". Do not invent numbers.
+- If a value is missing from the description, use null and explain in "notes".
+  Do not invent numbers.
 
 Job description:
 {job_text}
 """
 
+
+def extract_json(raw_text):
+    """Strips any stray text/markdown and parses the JSON into a dictionary.
+    Returns the dictionary, or None if it can't be parsed."""
+    start = raw_text.find("{")
+    end = raw_text.rfind("}")
+    if start == -1 or end == -1:
+        return None
+    try:
+        return json.loads(raw_text[start:end + 1])
+    except json.JSONDecodeError:
+        return None
+
+
+def estimate_from_text(job_text):
+    """The core function: raw job text in, structured estimate dictionary out.
+    Returns None if the AI response could not be parsed."""
+    prompt = build_prompt(job_text)
+
     response = client.messages.create(
-        model="claude-sonnet-4-6",
+        model=MODEL,
         max_tokens=1500,
         messages=[{"role": "user", "content": prompt}],
     )
 
-    raw = response.content[0].text
-
-    # Strip anything before the first { and after the last } (handles stray text / markdown fences)
-    start = raw.find("{")
-    end = raw.rfind("}")
-    if start == -1 or end == -1:
-        print("ERROR: No JSON object found in the response.")
-        return None
-    cleaned = raw[start:end + 1]
-
-    # Parse safely so a bad response flags a problem instead of crashing
-    try:
-        data = json.loads(cleaned)
-    except json.JSONDecodeError:
-        print("ERROR: Could not parse the response as JSON.")
-        return None
-
-    # Check every expected field is present; flag any that are missing
-    for field in EXPECTED_FIELDS:
-        if field not in data:
-            print(f"WARNING: missing expected field '{field}'")
-
-    return data
+    raw_text = response.content[0].text
+    return extract_json(raw_text)
 
 
-# --- Run it ---
-with open("data/sample_1_easy.txt", "r") as f:
-    job_text = f.read()
+# --- Day 1: run the function across all the EASY samples ---
 
-result = estimate_from_text(job_text)
+EASY_SAMPLES = [
+    "sample_1_easy.txt",
+    "sample_2_exterior.txt",
+]
 
-if result:
-    # Prove the parse worked by printing one field on its own
-    print("Line items:")
-    print(result["line_items"])
 
-    # Save the parsed result to the outputs folder
-    with open("outputs/sample_1_result.json", "w") as f:
-        json.dump(result, f, indent=2)
-    print("Saved to outputs/sample_1_result.json")
+def run_easy_samples():
+    """Runs every easy sample through the core function and logs a quick summary."""
+    print(f"{'sample':<28}{'parsed?':<10}{'fields present?':<16}")
+    print("-" * 54)
+
+    for filename in EASY_SAMPLES:
+        with open(f"data/{filename}", "r") as f:
+            job_text = f.read()
+
+        result = estimate_from_text(job_text)
+
+        if result is None:
+            print(f"{filename:<28}{'NO':<10}{'-':<16}")
+            continue
+
+        fields_ok = all(field in result for field in REQUIRED_FIELDS)
+        print(f"{filename:<28}{'yes':<10}{('yes' if fields_ok else 'MISSING'):<16}")
+
+        # Save each result so we can spot-check it by hand
+        out_name = filename.replace(".txt", "_result.json")
+        with open(f"outputs/{out_name}", "w") as f:
+            json.dump(result, f, indent=2)
+
+
+if __name__ == "__main__":
+    run_easy_samples()
