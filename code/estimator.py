@@ -1,19 +1,19 @@
 """
 estimator.py — Core pipeline for the AI Estimator (painting).
-Takes a raw job description, calls the AI, and returns a structured estimate.
+Takes a raw job description, calls the AI, validates the result, and returns it.
 """
 
 import os
 import json
-import time
 from dotenv import load_dotenv
 from anthropic import Anthropic
+
+from validate import validate_estimate
 
 load_dotenv()
 client = Anthropic(api_key=os.environ.get("ANTHROPIC_API_KEY"))
 
 MODEL = "claude-sonnet-4-6"
-REQUIRED_FIELDS = ["job_title", "line_items", "grand_total", "notes"]
 
 
 def build_prompt(job_text):
@@ -39,8 +39,7 @@ Job description:
 
 
 def extract_json(raw_text):
-    """Strips any stray text/markdown and parses the JSON into a dictionary.
-    Returns the dictionary, or None if it can't be parsed."""
+    """Strips stray text/markdown and parses JSON. Returns a dict, or None."""
     start = raw_text.find("{")
     end = raw_text.rfind("}")
     if start == -1 or end == -1:
@@ -52,8 +51,8 @@ def extract_json(raw_text):
 
 
 def estimate_from_text(job_text):
-    """The core function: raw job text in, structured estimate dictionary out.
-    Returns None if the AI response could not be parsed."""
+    """Core function: raw job text in, validated estimate out.
+    Returns a dict: {"estimate": <dict or None>, "problems": [<strings>]}."""
     prompt = build_prompt(job_text)
 
     response = client.messages.create(
@@ -62,41 +61,39 @@ def estimate_from_text(job_text):
         messages=[{"role": "user", "content": prompt}],
     )
 
-    raw_text = response.content[0].text
-    return extract_json(raw_text)
+    estimate = extract_json(response.content[0].text)
+
+    if estimate is None:
+        return {"estimate": None, "problems": ["could not parse JSON from AI response"]}
+
+    problems = validate_estimate(estimate)
+    return {"estimate": estimate, "problems": problems}
 
 
-# --- Day 1: run the function across all the EASY samples ---
+# --- Run across the easy samples and log a quick summary ---
 
-EASY_SAMPLES = [
-    "sample_1_easy.txt",
-    "sample_2_exterior.txt",
-]
+EASY_SAMPLES = ["sample_1_easy.txt", "sample_2_exterior.txt"]
 
 
 def run_easy_samples():
-    """Runs every easy sample through the core function and logs a quick summary."""
-    print(f"{'sample':<28}{'parsed?':<10}{'fields present?':<16}")
-    print("-" * 54)
+    print(f"{'sample':<28}{'parsed?':<10}{'valid?':<10}")
+    print("-" * 48)
 
     for filename in EASY_SAMPLES:
         with open(f"data/{filename}", "r") as f:
             job_text = f.read()
 
         result = estimate_from_text(job_text)
+        estimate = result["estimate"]
+        problems = result["problems"]
 
-        if result is None:
-            print(f"{filename:<28}{'NO':<10}{'-':<16}")
-            continue
+        parsed = "yes" if estimate else "NO"
+        valid = "yes" if (estimate and not problems) else "FLAGGED"
+        print(f"{filename:<28}{parsed:<10}{valid:<10}")
 
-        fields_ok = all(field in result for field in REQUIRED_FIELDS)
-        print(f"{filename:<28}{'yes':<10}{('yes' if fields_ok else 'MISSING'):<16}")
-
-        # Save each result so we can spot-check it by hand
-        out_name = filename.replace(".txt", "_result.json")
-        with open(f"outputs/{out_name}", "w") as f:
-            json.dump(result, f, indent=2)
-
-
-if __name__ == "__main__":
-    run_easy_samples()
+        if estimate:
+            out_name = filename.replace(".txt", "_result.json")
+            with open(f"outputs/{out_name}", "w") as f:
+                json.dump(estimate, f, indent=2)
+            for p in problems:
+                print(f"    flag: {p}")
