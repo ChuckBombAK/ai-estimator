@@ -1,0 +1,13 @@
+{
+  "job_title": "Exterior repaint — 1,400 sq ft two-story, one coat, trim contrast",
+  "line_items": [
+    {"task": "Power washing", "category": "labor", "quantity": 4, "unit": "hours", "unit_price": 45.00, "line_total": 180.00},
+    {"task": "Exterior painting labor (one coat)", "category": "labor", "quantity": 20, "unit": "hours", "unit_price": 45.00, "line_total": 900.00},
+    {"task": "Trim painting labor (contrast color)", "category": "labor", "quantity": 8, "unit": "hours", "unit_price": 45.00, "line_total": 360.00},
+    {"task": "Exterior paint", "category": "materials", "quantity": 8, "unit": "gallons", "unit_price": 42.00, "line_total": 336.00},
+    {"task": "Trim paint", "category": "materials", "quantity": 2, "unit": "gallons", "unit_price": 42.00, "line_total": 84.00},
+    {"task": "Supplies", "category": "materials", "quantity": 1, "unit": "lot", "unit_price": 75.00, "line_total": 75.00}
+  ],
+  "grand_total": 1935.00,
+  "notes": "One coat over existing good-condition paint; trim in contrasting color."
+}

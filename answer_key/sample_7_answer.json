@@ -1,0 +1,12 @@
+{
+  "job_title": "Deck stain and seal — 400 sq ft",
+  "line_items": [
+    {"task": "Power washing and light sanding", "category": "labor", "quantity": 4, "unit": "hours", "unit_price": 45.00, "line_total": 180.00},
+    {"task": "Stain application (one coat)", "category": "labor", "quantity": 5, "unit": "hours", "unit_price": 45.00, "line_total": 225.00},
+    {"task": "Sealer application (one coat)", "category": "labor", "quantity": 3, "unit": "hours", "unit_price": 45.00, "line_total": 135.00},
+    {"task": "Semi-transparent stain", "category": "materials", "quantity": 2, "unit": "gallons", "unit_price": 40.00, "line_total": 80.00},
+    {"task": "Clear sealer", "category": "materials", "quantity": 2, "unit": "gallons", "unit_price": 35.00, "line_total": 70.00}
+  ],
+  "grand_total": 690.00,
+  "notes": "Includes power washing and sanding prep. One coat stain plus one coat sealer."
+}

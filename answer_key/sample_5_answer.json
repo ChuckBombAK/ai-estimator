@@ -1,0 +1,12 @@
+{
+  "job_title": "Limewash accent wall + ceiling, 600 sq ft, high ceilings",
+  "line_items": [
+    {"task": "Scaffolding / lift rental (16 ft ceilings)", "category": "materials", "quantity": 1, "unit": "lot", "unit_price": 250.00, "line_total": 250.00},
+    {"task": "Limewash application labor (three coats)", "category": "labor", "quantity": 18, "unit": "hours", "unit_price": 50.00, "line_total": 900.00},
+    {"task": "Metallic gold trim labor", "category": "labor", "quantity": 4, "unit": "hours", "unit_price": 50.00, "line_total": 200.00},
+    {"task": "Limewash finish (specialty)", "category": "materials", "quantity": 6, "unit": "gallons", "unit_price": 60.00, "line_total": 360.00},
+    {"task": "Metallic gold paint (specialty)", "category": "materials", "quantity": 1, "unit": "gallons", "unit_price": 90.00, "line_total": 90.00}
+  ],
+  "grand_total": 1800.00,
+  "notes": "Specialty limewash and metallic paint prices are estimates and should be confirmed with supplier. High ceilings require lift/scaffolding. Three limewash coats as requested."
+}

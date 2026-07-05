@@ -1,6 +1,7 @@
 """
 estimator.py — Core pipeline for the AI Estimator (painting).
 Takes a raw job description, calls the AI, validates the result, and returns it.
+Also scores all samples against the hand-written answer keys.
 """
 
 import os
@@ -70,17 +71,58 @@ def estimate_from_text(job_text):
     return {"estimate": estimate, "problems": problems}
 
 
-# --- Run across the easy samples and log a quick summary ---
+# --- Scoring: compare a tool result to the hand-written answer, field by field ---
 
-EASY_SAMPLES = ["sample_1_easy.txt", "sample_2_exterior.txt"]
+def score_against_answer(tool_estimate, answer):
+    """Counts correct fields vs total fields for one sample.
+    Returns (correct, total)."""
+    correct = 0
+    total = 0
+
+    # Top-level simple fields
+    for field in ["job_title", "grand_total"]:
+        total += 1
+        if tool_estimate.get(field) == answer.get(field):
+            correct += 1
+
+    # notes: count as correct if both have a note when the answer does
+    total += 1
+    if bool(tool_estimate.get("notes")) == bool(answer.get("notes")):
+        correct += 1
+
+    # Line items, compared position by position
+    tool_items = tool_estimate.get("line_items", [])
+    answer_items = answer.get("line_items", [])
+    for i in range(max(len(tool_items), len(answer_items))):
+        t_item = tool_items[i] if i < len(tool_items) else {}
+        a_item = answer_items[i] if i < len(answer_items) else {}
+        for field in ["task", "category", "quantity", "unit", "unit_price", "line_total"]:
+            total += 1
+            if t_item.get(field) == a_item.get(field):
+                correct += 1
+
+    return correct, total
 
 
-def run_easy_samples():
-    print(f"{'sample':<28}{'parsed?':<10}{'valid?':<10}")
-    print("-" * 48)
+# --- Run all 10 samples, score them, print overall accuracy ---
 
-    for filename in EASY_SAMPLES:
-        with open(f"data/{filename}", "r") as f:
+SAMPLES = [
+    "sample_1_easy", "sample_2_exterior", "sample_3_vague",
+    "sample_4_missing_measurement", "sample_5_unusual_material",
+    "sample_6_kitchen", "sample_7_deck", "sample_8_office",
+    "sample_9_vague", "sample_10_specialty",
+]
+
+
+def run_all_samples():
+    print(f"{'sample':<32}{'parsed?':<10}{'valid?':<10}{'score':<10}")
+    print("-" * 62)
+
+    total_correct = 0
+    total_fields = 0
+
+    for name in SAMPLES:
+        with open(f"sample_data/{name}.txt", "r") as f:
             job_text = f.read()
 
         result = estimate_from_text(job_text)
@@ -89,11 +131,31 @@ def run_easy_samples():
 
         parsed = "yes" if estimate else "NO"
         valid = "yes" if (estimate and not problems) else "FLAGGED"
-        print(f"{filename:<28}{parsed:<10}{valid:<10}")
 
+        score_str = "-"
         if estimate:
-            out_name = filename.replace(".txt", "_result.json")
-            with open(f"outputs/{out_name}", "w") as f:
+            # answer key is sample_N_answer.json; map by number
+            num = name.split("_")[1]
+            answer_path = f"answer_key/sample_{num}_answer.json"
+            if os.path.exists(answer_path):
+                with open(answer_path, "r") as f:
+                    answer = json.load(f)
+                correct, fields = score_against_answer(estimate, answer)
+                total_correct += correct
+                total_fields += fields
+                score_str = f"{correct}/{fields}"
+
+            # save the output
+            with open(f"outputs/{name}_result.json", "w") as f:
                 json.dump(estimate, f, indent=2)
-            for p in problems:
-                print(f"    flag: {p}")
+
+        print(f"{name:<32}{parsed:<10}{valid:<10}{score_str:<10}")
+
+    if total_fields:
+        pct = round(100 * total_correct / total_fields, 1)
+        print("-" * 62)
+        print(f"OVERALL ACCURACY: {total_correct}/{total_fields} fields = {pct}%")
+
+
+if __name__ == "__main__":
+    run_all_samples()

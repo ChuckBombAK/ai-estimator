@@ -1,0 +1,10 @@
+{
+  "job_title": "Rental repaint — a few rooms (size unspecified)",
+  "line_items": [
+    {"task": "Interior painting labor", "category": "labor", "quantity": null, "unit": "hours", "unit_price": 45.00, "line_total": null},
+    {"task": "Neutral interior paint", "category": "materials", "quantity": null, "unit": "gallons", "unit_price": 33.00, "line_total": null},
+    {"task": "Supplies", "category": "materials", "quantity": null, "unit": "lot", "unit_price": null, "line_total": null}
+  ],
+  "grand_total": null,
+  "notes": "No square footage or room count given, so quantities and totals are null. Scope is 'a few rooms, clean and neutral.' Needs a walkthrough or measurements before a firm quote."
+}

@@ -1,0 +1,11 @@
+{
+  "job_title": "Interior repaint — house (size unspecified)",
+  "line_items": [
+    {"task": "Interior painting labor", "category": "labor", "quantity": null, "unit": "hours", "unit_price": 45.00, "line_total": null},
+    {"task": "Ceiling stain treatment (water stains noted)", "category": "labor", "quantity": null, "unit": "hours", "unit_price": 45.00, "line_total": null},
+    {"task": "Stain-blocking primer", "category": "materials", "quantity": null, "unit": "gallons", "unit_price": 32.00, "line_total": null},
+    {"task": "Interior paint", "category": "materials", "quantity": null, "unit": "gallons", "unit_price": 35.00, "line_total": null}
+  ],
+  "grand_total": null,
+  "notes": "Square footage not provided and number of rooms unclear, so quantities and totals are null. Water-stained ceiling will need stain-blocking primer. Needs measurements before a firm quote."
+}

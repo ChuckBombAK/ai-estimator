@@ -1,0 +1,12 @@
+{
+  "job_title": "Interior repaint — master bedroom + hallway, navy walls, white trim",
+  "line_items": [
+    {"task": "Surface prep", "category": "labor", "quantity": null, "unit": "hours", "unit_price": 45.00, "line_total": null},
+    {"task": "Painting labor (two coats + extra for dark color)", "category": "labor", "quantity": null, "unit": "hours", "unit_price": 45.00, "line_total": null},
+    {"task": "Tinted primer (for deep navy)", "category": "materials", "quantity": null, "unit": "gallons", "unit_price": 34.00, "line_total": null},
+    {"task": "Navy wall paint", "category": "materials", "quantity": null, "unit": "gallons", "unit_price": 38.00, "line_total": null},
+    {"task": "White trim paint", "category": "materials", "quantity": null, "unit": "gallons", "unit_price": 38.00, "line_total": null}
+  ],
+  "grand_total": null,
+  "notes": "Room square footage not provided, so quantities and totals are null. Deep navy will likely need a tinted primer and possibly an extra coat. Needs measurements to finalize."
+}

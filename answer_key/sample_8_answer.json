@@ -1,0 +1,14 @@
+{
+  "job_title": "Office suite repaint — 3,500 sq ft, two coats, walls + trim",
+  "line_items": [
+    {"task": "Full prep (patch, sand, tape, cover)", "category": "labor", "quantity": 14, "unit": "hours", "unit_price": 45.00, "line_total": 630.00},
+    {"task": "Wall painting labor (two coats)", "category": "labor", "quantity": 42, "unit": "hours", "unit_price": 45.00, "line_total": 1890.00},
+    {"task": "Trim and door painting labor", "category": "labor", "quantity": 16, "unit": "hours", "unit_price": 45.00, "line_total": 720.00},
+    {"task": "After-hours scheduling premium", "category": "labor", "quantity": 1, "unit": "lot", "unit_price": 400.00, "line_total": 400.00},
+    {"task": "Eggshell wall paint", "category": "materials", "quantity": 20, "unit": "gallons", "unit_price": 35.00, "line_total": 700.00},
+    {"task": "Semi-gloss trim paint", "category": "materials", "quantity": 5, "unit": "gallons", "unit_price": 38.00, "line_total": 190.00},
+    {"task": "Supplies", "category": "materials", "quantity": 1, "unit": "lot", "unit_price": 150.00, "line_total": 150.00}
+  ],
+  "grand_total": 4680.00,
+  "notes": "Two coats walls, semi-gloss trim and doors. After-hours work premium included."
+}

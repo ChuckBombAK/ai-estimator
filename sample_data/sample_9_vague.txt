@@ -1,0 +1,8 @@
+SAMPLE 9 — Tricky / vague
+
+Need someone to freshen up the paint in my rental before new tenants. A few rooms,
+nothing fancy, just make it clean and neutral. Not sure on sizes. Whenever you can
+fit it in. What would that cost roughly?
+
+[Note: no square footage, "a few rooms" undefined, "freshen up" ambiguous scope.
+Tool should return null where it can't measure and flag the gaps in notes.]

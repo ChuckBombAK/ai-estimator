@@ -1,0 +1,12 @@
+{
+  "job_title": "Nursery repaint — custom mural + glow stars (room size unspecified)",
+  "line_items": [
+    {"task": "Wall painting labor (two coats, low-VOC)", "category": "labor", "quantity": null, "unit": "hours", "unit_price": 45.00, "line_total": null},
+    {"task": "Custom mural labor (design provided by client)", "category": "labor", "quantity": null, "unit": "hours", "unit_price": 55.00, "line_total": null},
+    {"task": "Glow-in-the-dark star application", "category": "labor", "quantity": 2, "unit": "hours", "unit_price": 45.00, "line_total": 90.00},
+    {"task": "Low-VOC interior paint", "category": "materials", "quantity": null, "unit": "gallons", "unit_price": 40.00, "line_total": null},
+    {"task": "Glow-in-the-dark star kit (specialty)", "category": "materials", "quantity": 1, "unit": "lot", "unit_price": 60.00, "line_total": 60.00}
+  ],
+  "grand_total": null,
+  "notes": "Room size not provided, so wall and mural quantities and the grand total are null. Mural labor is a rough placeholder and depends on the provided design's complexity. Glow-star kit priced as an assumption. Needs measurements and mural details to finalize."
+}

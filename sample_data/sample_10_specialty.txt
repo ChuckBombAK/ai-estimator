@@ -1,0 +1,10 @@
+SAMPLE 10 — Tricky / unusual + missing info
+
+Repaint a nursery with a hand-painted mural on one accent wall (client will provide
+the mural design). Rest of the room is two coats of a low-VOC paint safe for kids.
+Room size not given. Also wants glow-in-the-dark stars added to the ceiling.
+Client: the Ansari household.
+
+[Note: mural is custom labor hard to price, glow-in-the-dark stars are an unusual
+material, and room size is missing. Tool should estimate what it can, null the
+unknowable quantities, and flag the mural/stars pricing as assumptions.]

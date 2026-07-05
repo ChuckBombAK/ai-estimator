@@ -1,0 +1,11 @@
+{
+  "job_title": "Kitchen walls repaint — 300 sq ft, one coat",
+  "line_items": [
+    {"task": "Light prep (clean walls, tape, cover counters)", "category": "labor", "quantity": 2, "unit": "hours", "unit_price": 45.00, "line_total": 90.00},
+    {"task": "Painting labor (walls, one coat)", "category": "labor", "quantity": 4, "unit": "hours", "unit_price": 45.00, "line_total": 180.00},
+    {"task": "Satin interior paint", "category": "materials", "quantity": 1, "unit": "gallons", "unit_price": 36.00, "line_total": 36.00},
+    {"task": "Supplies", "category": "materials", "quantity": 1, "unit": "lot", "unit_price": 30.00, "line_total": 30.00}
+  ],
+  "grand_total": 336.00,
+  "notes": "Walls only, one coat over existing. No ceiling or trim included."
+}
