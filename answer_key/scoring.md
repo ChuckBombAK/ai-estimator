@@ -49,12 +49,3 @@ For each sample, compare the tool's output to the hand-written answer, field by 
 | sample_8_office | | | |
 | sample_9_vague | | | |
 | sample_10_specialty | | | |
-
-## Improvement log (Day 4)
-
-- **Before accuracy:** [ ]
-- **Worst field:** [ ]
-- **Change made:** [ one thing only ]
-- **After accuracy:** [ ]
-- **Did any other field regress?:** [ ]
-- **Improvement story (for Week 5):** [ was X%, changed this, now Y% ]
