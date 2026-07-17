@@ -5,7 +5,7 @@ estimate (line items with quantity, unit, unit price, line total, and a grand to
 
 ## How to run
 1. Activate the environment: `source venv/bin/activate`
-2. Install requirements: `pip3 install anthropic python-dotenv openai`
+2. Install requirements: `pip3 install google-genai python-dotenv streamlit`
 3. Add your API key to a `.env` file (never committed).
 4. Run the estimator: `python3 code/estimator.py`
 5. Validate an output: `python3 code/validate.py`
